@@ -12,6 +12,14 @@ add_executable(race src/race.cpp)
 target_include_directories(race PRIVATE include)
 target_link_libraries(race PRIVATE Threads::Threads)
 
+add_executable(mutex_example src/mutex_example.cpp)
+target_include_directories(mutex_example PRIVATE include)
+target_link_libraries(mutex_example PRIVATE Threads::Threads)
+
+add_executable(deadlock src/deadlock.cpp)
+target_include_directories(deadlock PRIVATE include)
+target_link_libraries(deadlock PRIVATE Threads::Threads)
+
 add_executable(sum_serial src/sum_serial.cpp)
 target_include_directories(sum_serial PRIVATE include)
 target_link_libraries(sum_serial PRIVATE Threads::Threads)

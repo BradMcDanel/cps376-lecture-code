@@ -16,6 +16,10 @@ add_executable(mutex_example src/mutex_example.cpp)
 target_include_directories(mutex_example PRIVATE include)
 target_link_libraries(mutex_example PRIVATE Threads::Threads)
 
+add_executable(mutex_impl src/mutex_impl.cpp)
+target_include_directories(mutex_impl PRIVATE include)
+target_link_libraries(mutex_impl PRIVATE Threads::Threads)
+
 add_executable(deadlock src/deadlock.cpp)
 target_include_directories(deadlock PRIVATE include)
 target_link_libraries(deadlock PRIVATE Threads::Threads)

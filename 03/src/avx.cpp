@@ -51,10 +51,8 @@ int main() {
 
   // In real benchmarching code, we would want run this many iterations but
   // for simplicity, we just run it once.
-  std::cout << "sum time: " << micros(end - start).count() << " us"
-            << std::endl;
-  std::cout << "sum_avx time: " << micros(end - start).count() << " us"
-            << std::endl;
+  std::cout << "sum time: " << serial_duration << " us" << std::endl;
+  std::cout << "sum_avx time: " << avx_duration << " us" << std::endl;
   std::cout << "speedup: " << serial_duration / avx_duration << "x"
             << std::endl;
 

@@ -3,7 +3,8 @@
 #include <thread>
 #include <vector>
 
-void sum_func(int start_idx, int end_idx, std::vector<int>& arr, int& sum) {
+void sum_func(int start_idx, int end_idx, const std::vector<int> &arr,
+              int &sum) {
   for (int i = start_idx; i < end_idx; i++) {
     sum += arr[i];
   }
@@ -29,7 +30,7 @@ int main() {
     threads.push_back(std::move(t));
   }
 
-  for (auto& t : threads) {
+  for (auto &t : threads) {
     t.join();
   }
 

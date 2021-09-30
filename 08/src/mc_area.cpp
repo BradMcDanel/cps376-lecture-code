@@ -1,25 +1,48 @@
-#include <omp.h>
 #include <iostream>
+#include <omp.h>
+#include <vector>
 
 #include "image.h"
+
+double estimate_area(Image &img, int N, int M) {
+  omp_set_num_threads(N);
+
+  std::vector<int> sums;
+  for (size_t i = 0; i < N; i++) {
+    sums.push_back(0);
+  }
+
+#pragma omp parallel for
+  for (size_t i = 0; i < N * M; i++) {
+    int tid = omp_get_thread_num();
+    int x = rand() % img.w;
+    int y = rand() % img.h;
+    if (img.get(x, y) != 255) {
+      sums[tid]++;
+    }
+  }
+
+  int final_sum = 0;
+  for (size_t i = 0; i < N; i++) {
+    final_sum += sums[i];
+  }
+
+  double area = final_sum / double(N * M);
+  return area;
+}
 
 int main() {
   // Reads in a image (and converts to greyscale for simplicity)
   Image img("../data/fm.png");
 
-  // Get width and height of image
-  std::cout << img.w << ", " << img.h << std::endl;
+  int N = 4;
+  int M = 100;
 
-  // Get a pixel using .get
-  std::cout << img.get(0, 0) << std::endl;
-
-  // Save image to file
-  img.write("../data/fm_out.png");
-
-  // Goal: Use OpenMP to estimate area of non-zero pixels in the image
-  //       We assume that a brute-force approach is too slow, so we use
-  //       a Monte Carlo approach, with each thread sampling random
-  //       points in the image.
+  std::cout << estimate_area(img, N, 10) << std::endl;
+  std::cout << estimate_area(img, N, 100) << std::endl;
+  std::cout << estimate_area(img, N, 1000) << std::endl;
+  std::cout << estimate_area(img, N, 10000) << std::endl;
+  std::cout << estimate_area(img, N, 100000) << std::endl;
 
   return 0;
 }

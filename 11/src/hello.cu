@@ -6,9 +6,11 @@ __global__ void print_id() {
 }
 
 int main(void) {
+  int N = 1000000;
+  int grid = N / 1024;
   // specify grid and block dimensions
-  dim3 dimGrid(2, 2, 2);
-  dim3 dimBlock(2, 2, 2);
+  dim3 dimGrid(grid, 1, 1);
+  dim3 dimBlock(1024, 1, 1);
 
   // launch kernel
   print_id<<<dimGrid, dimBlock>>>();

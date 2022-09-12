@@ -1,3 +1,4 @@
+import time
 from multiprocessing import Process, Queue, shared_memory
 import numpy as np
 
@@ -11,7 +12,9 @@ def create_array(size):
 
 def add_one(shm, arr_len, idx):
     array = np.ndarray((arr_len,), dtype=np.int32, buffer=shm.buf)
-    array[idx] += 1
+    tmp = array[0]
+    # time.sleep(1)
+    array[11] = tmp + 1
 
 if __name__=='__main__':
     DATA_SIZE = 10

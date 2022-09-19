@@ -14,7 +14,7 @@ void do_stuff(int &value) {
 }
 
 int main() {
-  for (int i = 0; i < 20; ++i) {
+  for (int i = 0; i < 100; ++i) {
     int value = 0;
 
     std::thread t(do_stuff, std::ref(value));

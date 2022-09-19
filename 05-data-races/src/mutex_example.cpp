@@ -10,7 +10,7 @@ void do_stuff(int &value, std::mutex &m) {
   m.lock(); // blocks until the lock is granted
 
   // sleeping helps show the non-determinism
-  std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
 
   // this value is the same memory address as in the main thread
   value += 5;

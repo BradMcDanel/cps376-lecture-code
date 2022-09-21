@@ -18,6 +18,9 @@ float sum(const std::vector<float> &v) {
 
 float sum_avx_256(const std::vector<float> &v) {
   // TODO: implement!
+  // Hint: The line below loads the first
+  // 8 elements of v into x.
+  __m256 x = _mm256_load_ps(&v[0]);
   return 0;
 }
 

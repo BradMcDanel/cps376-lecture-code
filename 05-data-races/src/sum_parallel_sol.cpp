@@ -19,12 +19,12 @@ int main() {
   }
 
   auto start = std::chrono::high_resolution_clock::now();
-  // Divide the array into 4 threads
-  std::vector<int> sums = {0, 0, 0, 0};
+  // Divide the array into 16 threads
+  std::vector<int> sums = {0, 0, 0, 0,0, 0, 0, 0,0, 0, 0, 0,0, 0, 0, 0};
   std::vector<std::thread> threads;
-  for (int i = 0; i < 4; i++) {
-    int start_idx = i * arr.size() / 4;
-    int end_idx = (i + 1) * arr.size() / 4;
+  for (int i = 0; i < 16; i++) {
+    int start_idx = i * arr.size() / 16;
+    int end_idx = (i + 1) * arr.size() / 16;
     std::thread t(sum_func, start_idx, end_idx, std::ref(arr),
                   std::ref(sums[i]));
     threads.push_back(std::move(t));
@@ -34,9 +34,9 @@ int main() {
     t.join();
   }
 
-  // Reduce the 4 sums to a single sum
+  // Reduce the 16 sums to a single sum
   int sum = 0;
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 16; i++) {
     sum += sums[i];
   }
 

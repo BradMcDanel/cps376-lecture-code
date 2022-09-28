@@ -36,6 +36,23 @@ int main() {
   // struct of vectors.  Then, iterate over the vectors and update the units.
   // You can use the same timer as above to measure the time it takes to update
   // the units.
+  std::vector<int> x(NUM_UNITS);
+  std::vector<int> y(NUM_UNITS);
+  std::vector<int> z(NUM_UNITS);
+  for (int i = 0; i < NUM_UNITS; i++) {
+    x[i] = i;
+    y[i] = i;
+    z[i] = i;
+  }
+
+  t.start();
+  for (int i = 0; i < NUM_UNITS; i++) {
+    x[i] += 1;
+    y[i] += 1;
+    z[i] += 1;
+  }
+  t.stop();
+  std::cout << "SoA Time: " << t.elapsed() << " us" << std::endl;
 
   return 0;
 }

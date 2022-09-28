@@ -7,6 +7,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "-Wall -O2 -Wextra -Wno-missing-field-initializers")
 
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 add_executable(hello_openmp src/hello_openmp.cpp)
 target_include_directories(hello_openmp PRIVATE include)
 target_link_libraries(hello_openmp PUBLIC OpenMP::OpenMP_CXX)
@@ -17,6 +20,7 @@ target_link_libraries(critical_openmp PUBLIC OpenMP::OpenMP_CXX)
 
 add_executable(sum_threads src/sum_threads.cpp)
 target_include_directories(sum_threads PRIVATE include)
+target_link_libraries(sum_threads PRIVATE Threads::Threads)
 
 add_executable(sum_openmp src/sum_openmp.cpp)
 target_include_directories(sum_openmp PRIVATE include)

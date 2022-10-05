@@ -30,7 +30,7 @@ Dataset load_mnist(const std::string &img_path, const std::string &label_path,
     char *data = (char *)image.data;
     for (int j = 0; j < 784; j++) {
       float val = (float)data[j] / 255.0;
-      val = (val - MNIST_MEAN) / MNIST_STD;
+      val = std::abs(val);
       dataset.samples[i].data[j] = val;
     }
   }

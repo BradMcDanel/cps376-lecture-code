@@ -13,8 +13,17 @@ endif()
 add_executable(hello src/hello.cu)
 target_include_directories(hello PRIVATE include)
 
-add_executable(vector_add src/vector_add.cu)
-target_include_directories(vector_add PRIVATE include)
+add_executable(allocation src/allocation.cu)
+target_include_directories(allocation PRIVATE include)
 
-add_executable(matmul src/matmul.cu)
-target_include_directories(matmul PRIVATE include)
+add_executable(elementwise_add src/elementwise_add.cu)
+target_include_directories(elementwise_add PRIVATE include)
+
+add_executable(elementwise_add_sol src/solutions/elementwise_add.cu)
+target_include_directories(elementwise_add_sol PRIVATE include)
+
+add_executable(substring_finder src/substring_finder.cu)
+target_include_directories(substring_finder PRIVATE include)
+
+add_executable(substring_finder_sol src/solutions/substring_finder.cu)
+target_include_directories(substring_finder_sol PRIVATE include)

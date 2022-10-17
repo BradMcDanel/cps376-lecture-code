@@ -1,19 +1,19 @@
 #include <stdio.h>
 
-__global__ void print_id() {
-  printf("(%d %d %d) (%d %d %d)\n", blockIdx.x, blockIdx.y, blockIdx.z,
-         threadIdx.x, threadIdx.y, threadIdx.z);
+__global__ void hello_cuda() {
+  int thread_id = blockIdx.x * blockDim.x + threadIdx.x;
+  printf("Hello from %d\n", thread_id);
 }
 
-int main(void) {
-  int N = 1000000;
-  int grid = N / 1024;
-  // specify grid and block dimensions
-  dim3 dimGrid(grid, 1, 1);
-  dim3 dimBlock(1024, 1, 1);
+int main(int argc, char *argv[]) {
+  if (argc != 2) {
+    printf("Usage: %s <number of threads>\n", argv[0]);
+    return 1;
+  }
 
-  // launch kernel
-  print_id<<<dimGrid, dimBlock>>>();
+  int num_threads = atoi(argv[1]);
+
+  hello_cuda<<<1, num_threads>>>();
 
   // ensure the kernel is launched before program exits
   cudaDeviceSynchronize();

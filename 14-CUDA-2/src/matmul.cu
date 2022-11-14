@@ -20,6 +20,11 @@ __global__ void matmul(float *a, float *b, float *c, int n) {
   int col = blockIdx.x * blockDim.x + threadIdx.x;
   // TODO: implement matrix multiplication
   // We assume matricies are square
+  float sum = 0;
+  for (int k = 0; k < n; k++) {
+    sum += a[row * n + k] * b[k * n + col];
+  }
+  c[row * n + col] = sum;
 }
 
 int main(int argc, char **argv) {

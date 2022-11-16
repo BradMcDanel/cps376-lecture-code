@@ -4,7 +4,7 @@ project(lecture-code)
 find_package(MPI REQUIRED)
 include_directories(${MPI_INCLUDE_PATH})
 
-add_executable(bcast src/kv_store.cpp)
+add_executable(bcast src/bcast.cpp)
 target_link_libraries(bcast ${MPI_LIBRARIES})
 
 add_executable(kv_store src/kv_store.cpp)
